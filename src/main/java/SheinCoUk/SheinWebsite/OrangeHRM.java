@@ -32,22 +32,22 @@ public class OrangeHRM {
         Assert.assertEquals(actualAssignLeave, expectedAssignLeave);//assertion
         enterText(By.xpath("//input[@id='assignleave_txtEmployee_empName']"), props.getProperty("EmployeeName"));//enter existing employee name
         getselectedTextFromDropdownList(By.xpath("//select[@id='assignleave_txtLeaveType']"), props.getProperty("LeaveType"));//select leave type from the dropdown list
-        String entitledleave= getTextFromContent(By.xpath("//div[contains(text(), '80.00')]"));
+        String entitledleave= getTextFromContent(By.xpath("//div[contains(text(), '160.00')]"));
         clearAndEnterText(By.xpath("//input[@id='assignleave_txtFromDate']"), props.getProperty("FromDate"));//enter a from date
         clearAndEnterText(By.xpath("//input[@id='assignleave_txtToDate']"), props.getProperty("ToDate"));// enter a to date
         clickElement(By.xpath("//input[@id='assignBtn']"));//click on assign button
         waitUntilEleemtLoadAndIsClickable((By.xpath("//input[@id='assignBtn']")), 2000);//wait before clicking on assign button
         clickElement(By.xpath("//input[@id='assignBtn']"));//click on assign button
-        String expected= entitledleave.substring(0, 5);//to eliminate unncessary words
+        String expected= entitledleave.substring(0, 6);//to eliminate unncessary words
         System.out.println(expected);//to print the number of days before asigning leave
         Double entitledleavebalance=Double.parseDouble(expected);//converting string to double
-        Double numberofdaysofleave= entitledleavebalance-24.00;//deducting assigned leave from the balance
+        Double numberofdaysofleave= entitledleavebalance-44;//deducting assigned leave from the balance
         System.out.println(numberofdaysofleave);//expected
-        String remainingleave= getTextFromContent(By.xpath("//div[contains (text(),'56.00')]"));//to get text after assigning leave
-        String remainingdays=remainingleave.substring(0, 5);//eleminating unnecessary words
+        String remainingleave= getTextFromContent(By.xpath("//div[contains (text(),'116.00')]"));//to get text after assigning leave
+        String remainingdays=remainingleave.substring(0, 6);//eleminating unnecessary words
         Double balanceafterassign=Double.parseDouble(remainingdays);//converting to double
         System.out.println(balanceafterassign);//actual
-        Assert.assertEquals(remainingdays, numberofdaysofleave);//asserting actual with expected
+        Assert.assertEquals(balanceafterassign, numberofdaysofleave);//asserting actual with expected
 
     }
     @Test
